@@ -1,0 +1,15 @@
+{
+  "name": "apis",
+  "compatibility_date": "2026-10-10",
+  "assets": {
+    "directory": "./dist"
+  },
+  "previews": {},
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "persist": true
+    }
+  }
+}

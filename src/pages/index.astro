@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import home from '../content/settings/home.json';
+
+const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title={`${home.title}: the western honey bee`} description={home.tagline}>
+  <section class="hero">
+    <div class="wrap">
+      <h1>{home.title}</h1>
+      <p class="tagline">{home.tagline}</p>
+    </div>
+  </section>
+  <div class="wrap">
+    <p class="intro">{home.intro}</p>
+    <h2 id="topics">Topics</h2>
+    <ul class="topics">
+      {topics.map((t) => (
+        <li>
+          <h3><a href={`/topics/${t.id}/`}>{t.data.title}</a></h3>
+          <p>{t.data.summary}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>
