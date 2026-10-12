@@ -1,0 +1,49 @@
+backend:
+  name: github
+  repo: YOUR-USERNAME/apis-mellifera-site # TODO: keep your own value here
+  branch: main
+
+local_backend: true
+
+media_folder: public/uploads
+public_folder: /uploads
+
+# Adds an EN / IT toggle to every entry in the editor.
+i18n:
+  structure: multiple_folders # src/content/topics/en/x.md + src/content/topics/it/x.md
+  locales: [en, it]
+  default_locale: en
+
+collections:
+  - name: topics
+    label: Topics
+    label_singular: Topic
+    folder: src/content/topics
+    extension: md
+    create: true
+    slug: '{{slug}}'
+    summary: '{{title}}'
+    i18n: true
+    fields:
+      - { name: title, label: Title, widget: string, i18n: true }
+      - { name: summary, label: Summary, widget: text, i18n: true, hint: One or two sentences shown on the home page. }
+      - { name: order, label: Order, widget: number, value_type: int, default: 10, i18n: duplicate, hint: Lower numbers appear first. }
+      - { name: image, label: Image, widget: image, required: false, i18n: duplicate }
+      - { name: imageAlt, label: Image description, widget: string, required: false, i18n: true }
+      - { name: body, label: Body, widget: markdown, i18n: true }
+
+  - name: settings
+    label: Site settings
+    i18n:
+      structure: single_file # one home.json holding { "en": {...}, "it": {...} }
+      locales: [en, it]
+      default_locale: en
+    files:
+      - name: home
+        label: Home page
+        file: src/content/settings/home.json
+        i18n: true
+        fields:
+          - { name: title, label: Heading, widget: string, i18n: true }
+          - { name: tagline, label: Tagline, widget: text, i18n: true }
+          - { name: intro, label: Introduction, widget: text, i18n: true }
